@@ -3,7 +3,7 @@ from mpl_finance import candlestick_ohlc
 import pandas as pd
 import matplotlib.dates as mpl_dates
 
-def plotStock(stockdf):
+def plotStock(stockdf,companyname):
     plt.style.use('ggplot')
 
     # Extracting Data for plotting
@@ -20,6 +20,7 @@ def plotStock(stockdf):
     # Setting labels & titles
     ax.set_xlabel('Date')
     ax.set_ylabel('Price')
+    ax.set_title(f'{companyname}')
 
     date_format = mpl_dates.DateFormatter('%d-%m-%Y')
     ax.xaxis.set_major_formatter(date_format)

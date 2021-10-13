@@ -7,7 +7,7 @@ import investpy
 
 # News Dataframe for each ticker
 def newsDataframe(ticker):
-    soup = BeautifulSoup(http.get(f"https://ceo.ca/{ticker}").content)
+    soup = BeautifulSoup(http.get(f"https://ceo.ca/{ticker}").content,'lxml')
     base_url = 'https://ceo.ca'
 
     newsdf = pd.DataFrame()
@@ -55,9 +55,3 @@ def historicalData(companyname, startTime, endTime):
 def stockInformation(companyname):
     search_result = investpy.search_quotes(text=companyname, products=['stocks'], n_results=1)
     return search_result.retrieve_information()
-
-
-newsDataframe('VPT')
-stockInformation("VentriPoint Diagnostics Ltd")
-recent_df = recentData("Facedrive Inc")
-recent_df = recent_df.reset_index()
