@@ -21,6 +21,7 @@ def plotStock(stockdf,companyname):
     ax.set_xlabel('Date')
     ax.set_ylabel('Price')
     ax.set_title(f'{companyname}')
+    ax.xaxis_date()
 
     date_format = mpl_dates.DateFormatter('%d-%m-%Y')
     ax.xaxis.set_major_formatter(date_format)
@@ -28,4 +29,4 @@ def plotStock(stockdf,companyname):
 
     fig.tight_layout()
 
-    plt.show()
+    return fig

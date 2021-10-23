@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Halts & Resumptions Report</title>
+</head>
+<body>
+     <h1>CANADIAN NEWS</h1>
+     <p style="font-size:1vw;"> Section 1. Halted Tickers for TSX, TSX-V and CSE </p>
+    <p style="font-size:1vw;"> Source Page Information: <a href="https://www.iiroc.ca/news-and-publications/halts-and-resumptions"> CANADIAN HALTS </a> </p>
+    <h2>Canadian Halted Tickers</h2>
+	<style>
+	table, td, th {
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+
+        th, td {
+            padding: 15px;
+        }
+
+        table { background-color: white; }
+        th { background-color: #57D0F1; }
+	</style>
+     {{ haltdf }}
+
+     <br>
+    <p style="font-size:1vw;">Section 2. The table below contains the resumed tickers for TSX, TSX-V and CSE</p>
+    <p style="font-size:1vw;"> Source Page Information: <a href="https://www.iiroc.ca/news-and-publications/halts-and-resumptions"> CANADIAN RESUMPTIONS </a> </p>
+    <h2>Canadian Resumption Tickers</h2>
+	<style>
+	table, td, th {
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+
+        th, td {
+            padding: 15px;
+        }
+
+        table { background-color: white; }
+        th { background-color: #57D0F1; }
+	</style>
+     {{ resumptiondf }}
+    <br>
+
+     <h1>UNITED STATES NEWS</h1> <br>
+    <p style="font-size:1vw;"> Section 3. Halted and Resumed Tickers for NYSE and NASDAQ</p>
+     <p style="font-size:1vw;"> Source Page Information: <a href="https://www.nyse.com/trade-halt-current"> NYSE and NASDAQ Halts/Resumptions</a> </p>
+
+    <h2>USA Halts & Resumption Tickers</h2>
+	<style>
+	table, td, th {
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+    tr:nth-child(even) {
+    background-color: #D6EEEE;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+
+        th, td {
+            padding: 15px;
+        }
+
+        table { background-color: white; }
+        th { background-color: #57D0F1; }
+	</style>
+     {{ dfUSA }}
+</body>
+</html>
