@@ -35,7 +35,7 @@ for i in range(1,100,1):
     except Exception as e:
         pass
 
-currentDate = date.today()
+currentDate = "2021-11-17" #date.today()
 path_wkhtmltopdf = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
 path_html_directory = root_directory
 base_html = path_html_directory + '\ReportTemplateGainersAnomaly.html'
@@ -51,7 +51,31 @@ for gainTicker in gainersTickers:
 
 with open(html_file,"a") as htmlFile:
 
-    htmlFile.write('<h1>Top Small Cap Gainers</h1>')
+    htmlFile.write("""<!DOCTYPE html>
+    <html>
+    <body>
+         <h1>Top Small Cap Gainers</h1>
+    	<style>
+    	table, td, th {
+                border: 1px solid #ddd;
+                text-align: center;
+            }
+
+
+            table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+
+            th, td {
+                padding: 15px;
+            }
+
+            table { background-color: white; }
+            th { background-color: #57D0F1; }
+    	</style>) """)
+
     for j,df in enumerate(gainerDF):
         htmlFile.write('<br>')
         htmlFile.write('<br>')

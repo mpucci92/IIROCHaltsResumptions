@@ -18,7 +18,6 @@ pd.set_option('display.width', None)
 pd.set_option('display.max_colwidth', None)
 root_directory = os.path.dirname(os.path.realpath(__file__))
 
-
 def createURL(complete_url):
     urlHaltResumptionList = []
     soup = (BeautifulSoup(requests.get(complete_url).content, 'html.parser'))
@@ -32,7 +31,6 @@ def createURL(complete_url):
             urlHaltResumptionList.append(final_url)
 
     return urlHaltResumptionList
-
 
 def splitURL(urlHaltResumptionList):
     haltsHistorical = []
@@ -66,7 +64,6 @@ def createHalts(HistoricalFinalHaltsData):
     dfHalt = pd.DataFrame.from_dict(halt_df_list)
     clean_ticker_halts = []
     clean_reason_halts = []
-
 
     for ticker in dfHalt.ticker:
         try:
@@ -148,11 +145,11 @@ def companyInformationUSA(companylist):
 
 
 if __name__ == '__main__':
-    currentDate = date.today()
+    currentDate = "2021-11-17" #date.today()
     path_wkhtmltopdf = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
     path_html_directory = root_directory
-    html_file = path_html_directory + fr'\Small Cap Reports\HTMLs\Report_{currentDate}.html'
-    pdf_file = path_html_directory + fr'\Small Cap Reports\PDFs\Report_{currentDate}.pdf'
+    html_file = path_html_directory + fr'\Small Cap Reports\HTMLs\Report_HaltResumptions_{currentDate}.html'
+    pdf_file = path_html_directory + fr'\Small Cap Reports\PDFs\Report_HaltResumptions_{currentDate}.pdf'
 
     #1. Canada Names
 
@@ -160,7 +157,7 @@ if __name__ == '__main__':
     HistoricalFinalResumptionData = []
 
     base_url_historical = 'https://iiroc.mediaroom.com/index.php?o='
-    parameter1 = "25"
+    parameter1 = "0"
     parameter2 = "2021"
     url_year = '&s=2429&year='
 
@@ -181,7 +178,7 @@ if __name__ == '__main__':
     resumptiondf = createResumptions(HistoricalFinalResumptionData)
 
     # USA Names:
-    currentDate = date.today()
+    #currentDate = date.today()
     path_to_save = root_directory + fr"\UsData\{currentDate}.csv"
 
     # uncomment to download data for the day
@@ -195,11 +192,8 @@ if __name__ == '__main__':
     halt_companies_names = []
 
 
-    todayTickersHalts = list(haltdf[haltdf['Timestamp'] > '2021-10-19 00:00:00'].Ticker)
-    todayCompanyHalts = list(haltdf[haltdf['Timestamp'] > '2021-10-19 00:00:00'].Company)
-
-    #todayTickersHalts = list(haltdf[haltdf['Timestamp'] > f'{currentDate} 00:00:00'].Ticker)
-    #todayCompanyHalts = list(haltdf[haltdf['Timestamp'] > f'{currentDate} 00:00:00'].Company)
+    todayTickersHalts = list(haltdf[haltdf['Timestamp'] > f'{currentDate} 00:00:00'].Ticker)
+    todayCompanyHalts = list(haltdf[haltdf['Timestamp'] > f'{currentDate} 00:00:00'].Company)
 
     for i,ticker in enumerate(todayTickersHalts):
         try:
@@ -212,11 +206,8 @@ if __name__ == '__main__':
     resumptions_companies_list = []
     resumptions_companies_names = []
 
-    todayTickersResumptions = list(resumptiondf[resumptiondf['Timestamp'] > '2021-10-19 00:00:00'].Ticker)
-    todayCompanyResumptions = list(resumptiondf[resumptiondf['Timestamp'] > '2021-10-19 00:00:00'].Company)
-
-    # todayTickersResumptions = list(resumptiondf[resumptiondf['Timestamp'] > f'{currentDate} 00:00:00'].Ticker)
-    # todayCompanyResumptions = list(resumptiondf[resumptiondf['Timestamp'] > f'{currentDate} 00:00:00'].Company)
+    todayTickersResumptions = list(resumptiondf[resumptiondf['Timestamp'] > f'{currentDate} 00:00:00'].Ticker)
+    todayCompanyResumptions = list(resumptiondf[resumptiondf['Timestamp'] > f'{currentDate} 00:00:00'].Company)
 
 
     for i,ticker in enumerate(todayTickersResumptions):
@@ -226,6 +217,7 @@ if __name__ == '__main__':
         except Exception as e:
             resumptions_companies_list.append("NONE")
             resumptions_companies_names.append(todayCompanyResumptions[i])
+
 
     generatePDF(path_wkhtmltopdf,path_html_directory,html_file,pdf_file,haltdf.to_html(),resumptiondf.to_html(),dfUSA.to_html())
 

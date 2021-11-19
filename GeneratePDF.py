@@ -15,7 +15,7 @@ def generatePDF(path_wkhtmltopdf,path_html_directory,html_file,pdf_file,var1,var
     html_out = template.render(template_vars)
 
     # open the html file and put the newly rendered html in it
-    with open(html_file, "w") as file:
+    with open(html_file, "w",encoding='utf-8') as file:
         file.write(html_out)
 
     # convert html to pdf
